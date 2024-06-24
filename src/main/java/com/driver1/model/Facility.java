@@ -1,4 +1,4 @@
-package com.driver1.model;
+package com.driver.model;
 
 public enum Facility {
 
