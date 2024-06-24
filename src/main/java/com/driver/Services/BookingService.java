@@ -20,19 +20,25 @@ public class BookingService
 
     public int bookARoom(Booking booking)
     {
-        Hotel hotel=hotelRepository.getHotelMap().get(booking.getHotelName());
-        if(hotel==null || hotel.getAvailableRooms()<booking.getNoOfRooms())
+        Map<String, Hotel> hotelMap=hotelRepository.getHotelMap();
+        Hotel hotel=hotelMap.get(booking.getHotelName());
+        if(hotel.getAvailableRooms()>=booking.getNoOfRooms())
+        {
+            String bookingId=String.valueOf(UUID.randomUUID());
+            booking.setBookingId(bookingId);
+            booking.setAmountToBePaid( booking.getNoOfRooms() * hotel.getPricePerNight() );
+            hotel.setAvailableRooms(hotel.getAvailableRooms()-booking.getNoOfRooms());
+            hotelMap.put(hotel.getHotelName(),hotel);
+            hotelRepository.setHotelMap(hotelMap);
+            Map<String, Booking> bookingMap = bookingRepository.getBookingMap();
+            bookingMap.put(bookingId,booking);
+            bookingRepository.setBookingMap(bookingMap);
+            return booking.getNoOfRooms() * hotel.getPricePerNight();
+        }
+        else
         {
             return -1;
         }
-        String bookingId=String.valueOf(UUID.randomUUID());
-        booking.setBookingId(bookingId);
-        booking.setAmountToBePaid( booking.getNoOfRooms() * hotel.getPricePerNight() );
-
-        Map<String, Booking> bookingMap = bookingRepository.getBookingMap();
-        bookingMap.put(bookingId,booking);
-        bookingRepository.setBookingMap(bookingMap);
-        return booking.getNoOfRooms() * hotel.getPricePerNight();
     }
 
     public int getBookings(Integer aadharCard)
