@@ -18,7 +18,7 @@ public class HotelService
     {
         Map<String, Hotel> hotelMap= hotelRepository.getHotelMap();
 
-        if(ObjectUtils.isEmpty(hotel) || hotelMap.containsKey(hotel.getHotelName()))
+        if(ObjectUtils.isEmpty(hotel) || hotelMap.containsKey(hotel.getHotelName()) || hotel.getHotelName()==null)
         {
             return "FAILURE";
         }
@@ -31,7 +31,10 @@ public class HotelService
     {
         Map<String,Hotel> hotelMap=hotelRepository.getHotelMap();
         String hotelNameOfMostFacilities="";
+        if(hotelMap.isEmpty())
+            return hotelNameOfMostFacilities;
         int maxFacilities=-1;
+
         for(Map.Entry<String,Hotel> entry:hotelMap.entrySet())
         {
             String curHotelName = entry.getKey();

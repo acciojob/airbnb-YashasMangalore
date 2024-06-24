@@ -21,7 +21,7 @@ public class BookingService
     {
         Map<String,Booking> bookingMap=new HashMap<>();
         Hotel hotel=hotelRepository.getHotelMap().get(booking.getHotelName());
-        if(hotel.getAvailableRooms()!=booking.getNoOfRooms())
+        if(hotel.getAvailableRooms()<booking.getNoOfRooms())
         {
             return -1;
         }
@@ -39,7 +39,8 @@ public class BookingService
         String user=userRepository.getUserMap().get(aadharCard).getName();
         Map<String,Booking> bookingMap=bookingRepository.getBookingMap();
         int count = 0;
-
+        if(user.isEmpty())
+            return count;
         for(Map.Entry<String, Booking> bookingEntry:bookingMap.entrySet())
         {
             Booking booking=bookingEntry.getValue();
