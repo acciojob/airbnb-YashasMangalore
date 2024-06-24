@@ -1,6 +1,6 @@
-package com.driver.Repository;
+package com.driver1.Repository;
 
-import com.driver.model.User;
+import com.driver1.model.User;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -1,6 +1,6 @@
-package com.driver.Repository;
+package com.driver1.Repository;
 
-import com.driver.model.Hotel;
+import com.driver1.model.Hotel;
 import java.util.HashMap;
 import java.util.Map;
 

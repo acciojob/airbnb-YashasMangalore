@@ -1,13 +1,13 @@
-package com.driver.Services;
+package com.driver1.Services;
 
-import com.driver.Repository.BookingRepository;
-import com.driver.Repository.HotelRepository;
-import com.driver.Repository.UserRepository;
-import com.driver.model.Booking;
-import com.driver.model.Hotel;
-import com.driver.model.User;
+import com.driver1.Repository.BookingRepository;
+import com.driver1.Repository.HotelRepository;
+import com.driver1.Repository.UserRepository;
+import com.driver1.model.Booking;
+import com.driver1.model.Hotel;
+import com.driver1.model.User;
 import org.springframework.stereotype.Service;
-import java.util.HashMap;
+
 import java.util.Map;
 import java.util.UUID;
 
@@ -18,46 +18,29 @@ public class BookingService
     HotelRepository hotelRepository=new HotelRepository();
     UserRepository userRepository=new UserRepository();
 
-    public Integer bookARoom(Booking booking) {
-        // Retrieve hotelMap from hotelRepository
-        Map<String, Hotel> hotelMap = hotelRepository.getHotelMap();
+    public int bookARoom(Booking booking)
+    {
+        Map<String, Hotel> hotelMap=hotelRepository.getHotelMap();
+        Hotel hotel=hotelMap.get(booking.getHotelName());
 
-        // Retrieve Hotel object using booking's hotelName
-        Hotel hotel = hotelMap.get(booking.getHotelName());
-
-        // Check if hotel exists
-        if (hotel == null) {
-            return -1; // Hotel not found
+        if(hotel.getAvailableRooms()>=booking.getNoOfRooms())
+        {
+            String bookingId=String.valueOf(UUID.randomUUID());
+            booking.setBookingId(bookingId);
+            booking.setAmountToBePaid( booking.getNoOfRooms() * hotel.getPricePerNight() );
+            hotel.setAvailableRooms(hotel.getAvailableRooms()-booking.getNoOfRooms());
+            hotelMap.put(hotel.getHotelName(),hotel);
+            hotelRepository.setHotelMap(hotelMap);
+            Map<String, Booking> bookingMap = bookingRepository.getBookingMap();
+            bookingMap.put(bookingId,booking);
+            bookingRepository.setBookingMap(bookingMap);
+            return booking.getNoOfRooms() * hotel.getPricePerNight();
         }
-
-        // Check if there are enough available rooms
-        if (hotel.getAvailableRooms() < booking.getNoOfRooms()) {
-            return -1; // Not enough rooms available
+        else
+        {
+            return -1;
         }
-
-        // Generate booking ID
-        String bookingId = String.valueOf(UUID.randomUUID());
-        booking.setBookingId(bookingId);
-
-        // Calculate amount to be paid
-        int amountPaid = booking.getNoOfRooms() * hotel.getPricePerNight();
-        booking.setAmountToBePaid(amountPaid);
-
-        // Update available rooms in the hotel
-        hotel.setAvailableRooms(hotel.getAvailableRooms() - booking.getNoOfRooms());
-
-        // Update booking repository
-        Map<String, Booking> bookingMap = bookingRepository.getBookingMap();
-        bookingMap.put(bookingId, booking);
-        bookingRepository.setBookingMap(bookingMap);
-
-        // Update hotel repository
-        hotelMap.put(booking.getHotelName(), hotel);
-        hotelRepository.setHotelMap(hotelMap);
-
-        return amountPaid;
     }
-
 
     public int getBookings(Integer aadharCard)
     {

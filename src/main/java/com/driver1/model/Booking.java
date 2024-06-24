@@ -1,4 +1,4 @@
-package com.driver.model;
+package com.driver1.model;
 
 public class Booking {
 

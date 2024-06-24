@@ -1,12 +1,12 @@
-package com.driver.controllers;
+package com.driver1.controllers;
 
-import com.driver.Services.BookingService;
-import com.driver.Services.HotelService;
-import com.driver.Services.UserService;
-import com.driver.model.Booking;
-import com.driver.model.Facility;
-import com.driver.model.Hotel;
-import com.driver.model.User;
+import com.driver1.Services.BookingService;
+import com.driver1.Services.HotelService;
+import com.driver1.Services.UserService;
+import com.driver1.model.Booking;
+import com.driver1.model.Facility;
+import com.driver1.model.Hotel;
+import com.driver1.model.User;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

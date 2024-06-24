@@ -1,7 +1,7 @@
-package com.driver.Services;
+package com.driver1.Services;
 
-import com.driver.Repository.UserRepository;
-import com.driver.model.User;
+import com.driver1.Repository.UserRepository;
+import com.driver1.model.User;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 

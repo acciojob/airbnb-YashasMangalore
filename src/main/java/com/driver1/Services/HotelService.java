@@ -1,8 +1,8 @@
-package com.driver.Services;
+package com.driver1.Services;
 
-import com.driver.Repository.HotelRepository;
-import com.driver.model.Facility;
-import com.driver.model.Hotel;
+import com.driver1.Repository.HotelRepository;
+import com.driver1.model.Facility;
+import com.driver1.model.Hotel;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
