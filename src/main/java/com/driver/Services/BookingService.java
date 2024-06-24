@@ -5,6 +5,7 @@ import com.driver.Repository.HotelRepository;
 import com.driver.Repository.UserRepository;
 import com.driver.model.Booking;
 import com.driver.model.Hotel;
+import com.driver.model.User;
 import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,10 +20,10 @@ public class BookingService
 
     public int bookARoom(Booking booking)
     {
-        if (booking == null || booking.getHotelName() == null)
-        {
-            return -1; // or handle null booking or hotelName
-        }
+//        if (booking == null || booking.getHotelName() == null)
+//        {
+//            return -1; // or handle null booking or hotelName
+//        }
         if (hotelRepository == null || hotelRepository.getHotelMap() == null)
         {
             return -1; // or handle null hotelRepository or hotelMap
@@ -54,7 +55,10 @@ public class BookingService
         {
             return count; // or throw an exception, depending on your design
         }
-        String user=userRepository.getUserMap().get(aadharCard).getName();
+        User userDetails=userRepository.getUserMap().get(aadharCard);
+        if(userDetails==null)
+            return count;
+        String user=userDetails.getName();
         if (user == null || user.isEmpty()) {
             return count;
         }
