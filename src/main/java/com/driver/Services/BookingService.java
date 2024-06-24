@@ -20,14 +20,14 @@ public class BookingService
 
     public int bookARoom(Booking booking)
     {
-//        if (booking == null || booking.getHotelName() == null)
-//        {
-//            return -1; // or handle null booking or hotelName
-//        }
-        if (hotelRepository == null || hotelRepository.getHotelMap() == null)
+        if (booking == null || booking.getHotelName() == null)
         {
-            return -1; // or handle null hotelRepository or hotelMap
+            return -1; // or handle null booking or hotelName
         }
+//        if (hotelRepository == null || hotelRepository.getHotelMap() == null)
+//        {
+//            return -1; // or handle null hotelRepository or hotelMap
+//        }
 
         Hotel hotel=hotelRepository.getHotelMap().get(booking.getHotelName());
         if(hotel==null||hotel.getAvailableRooms()<booking.getNoOfRooms())
