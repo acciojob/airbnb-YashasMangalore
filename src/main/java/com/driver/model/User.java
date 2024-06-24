@@ -1,7 +1,7 @@
 package com.driver.model;
 
-public class User {
-
+public class User
+{
     private int aadharCardNo; //This is the unique key that determines a unique user
     private String name;
     private int age;

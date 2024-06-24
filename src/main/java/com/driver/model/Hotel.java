@@ -2,8 +2,8 @@ package com.driver.model;
 
 import java.util.List;
 
-public class Hotel {
-
+public class Hotel
+{
     private String hotelName; //This will be the primary key and will be unique for each hotel in hotelDb
     private int availableRooms;
 
