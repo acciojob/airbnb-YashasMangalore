@@ -20,7 +20,8 @@ public class BookingService
 
     public int bookARoom(Booking booking)
     {
-        if (booking == null || booking.getHotelName() == null || hotelRepository == null || hotelRepository.getHotelMap() == null || userRepository == null || userRepository.getUserMap() == null) {
+        if (booking == null || booking.getHotelName() == null)
+        {
             return -1; // or handle null scenarios appropriately
         }
         Map<String, Hotel> hotelMap=hotelRepository.getHotelMap();
