@@ -33,9 +33,9 @@ public class BookingService
             String bookingId=String.valueOf(UUID.randomUUID());
             booking.setBookingId(bookingId);
             booking.setAmountToBePaid( booking.getNoOfRooms() * hotel.getPricePerNight() );
-            hotel.setAvailableRooms(hotel.getAvailableRooms()-booking.getNoOfRooms());
-            hotelMap.put(hotel.getHotelName(),hotel);
-            hotelRepository.setHotelMap(hotelMap);
+//            hotel.setAvailableRooms(hotel.getAvailableRooms()-booking.getNoOfRooms());
+//            hotelMap.put(hotel.getHotelName(),hotel);
+//            hotelRepository.setHotelMap(hotelMap);
             Map<String, Booking> bookingMap = bookingRepository.getBookingMap();
             bookingMap.put(bookingId,booking);
             bookingRepository.setBookingMap(bookingMap);
