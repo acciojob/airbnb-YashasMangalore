@@ -28,7 +28,6 @@ public class BookingService
             return -1; // or handle null hotelRepository or hotelMap
         }
 
-        Map<String,Booking> bookingMap=new HashMap<>();
         Hotel hotel=hotelRepository.getHotelMap().get(booking.getHotelName());
         if(hotel==null||hotel.getAvailableRooms()<booking.getNoOfRooms())
         {
@@ -38,6 +37,11 @@ public class BookingService
         booking.setBookingId(bookingId);
         booking.setAmountToBePaid( booking.getNoOfRooms()* hotel.getPricePerNight() );
 
+        Map<String, Booking> bookingMap = bookingRepository.getBookingMap();
+        if (bookingMap == null)
+        {
+            bookingMap = new HashMap<>();
+        }
         bookingMap.put(bookingId,booking);
         bookingRepository.setBookingMap(bookingMap);
         return booking.getAmountToBePaid();
