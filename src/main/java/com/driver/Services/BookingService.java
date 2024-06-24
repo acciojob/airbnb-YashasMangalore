@@ -36,15 +36,21 @@ public class BookingService
 
     public int getBookings(Integer aadharCard)
     {
-        String user=userRepository.getUserMap().get(aadharCard).getName();
-        Map<String,Booking> bookingMap=bookingRepository.getBookingMap();
         int count = 0;
-        if(user.isEmpty())
+        if (userRepository == null || bookingRepository == null)
+        {
+            return count; // or throw an exception, depending on your design
+        }
+        String user=userRepository.getUserMap().get(aadharCard).getName();
+        if (user == null || user.isEmpty()) {
             return count;
+        }
+        Map<String,Booking> bookingMap=bookingRepository.getBookingMap();
+
         for(Map.Entry<String, Booking> bookingEntry:bookingMap.entrySet())
         {
             Booking booking=bookingEntry.getValue();
-            if(booking.getBookingPersonName().equals(user))
+            if(booking.getBookingPersonName() != null||booking.getBookingPersonName().equals(user))
                 count++;
         }
         return count;

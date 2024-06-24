@@ -18,7 +18,7 @@ public class HotelService
     {
         Map<String, Hotel> hotelMap= hotelRepository.getHotelMap();
 
-        if(ObjectUtils.isEmpty(hotel) || hotelMap.containsKey(hotel.getHotelName()) || hotel.getHotelName()==null)
+        if(hotel==null || hotel.getHotelName()==null || ObjectUtils.isEmpty(hotel) || hotelMap.containsKey(hotel.getHotelName()) )
         {
             return "FAILURE";
         }
