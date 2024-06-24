@@ -24,13 +24,13 @@ public class BookingService
         {
             return -1; // or handle null booking or hotelName
         }
-//        if (hotelRepository == null || hotelRepository.getHotelMap() == null)
-//        {
-//            return -1; // or handle null hotelRepository or hotelMap
-//        }
+        if (hotelRepository == null || hotelRepository.getHotelMap() == null)
+        {
+            return -1; // or handle null hotelRepository or hotelMap
+        }
 
         Hotel hotel=hotelRepository.getHotelMap().get(booking.getHotelName());
-        if(hotel==null||hotel.getAvailableRooms()<booking.getNoOfRooms())
+        if(hotel.getAvailableRooms()<booking.getNoOfRooms())
         {
             return -1;
         }
