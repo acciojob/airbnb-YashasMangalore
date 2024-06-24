@@ -20,8 +20,13 @@ public class BookingService
 
     public int bookARoom(Booking booking)
     {
+        if (booking == null || booking.getHotelName() == null || hotelRepository == null || hotelRepository.getHotelMap() == null || userRepository == null || userRepository.getUserMap() == null) {
+            return -1; // or handle null scenarios appropriately
+        }
         Map<String, Hotel> hotelMap=hotelRepository.getHotelMap();
         Hotel hotel=hotelMap.get(booking.getHotelName());
+        if(hotel==null)
+            return -1;
         if(hotel.getAvailableRooms()>=booking.getNoOfRooms())
         {
             String bookingId=String.valueOf(UUID.randomUUID());
