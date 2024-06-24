@@ -20,32 +20,19 @@ public class BookingService
 
     public int bookARoom(Booking booking)
     {
-        if (booking == null || booking.getHotelName() == null)
-        {
-            return -1; // or handle null booking or hotelName
-        }
-        if (hotelRepository == null || hotelRepository.getHotelMap() == null)
-        {
-            return -1; // or handle null hotelRepository or hotelMap
-        }
-
         Hotel hotel=hotelRepository.getHotelMap().get(booking.getHotelName());
-        if(hotel.getAvailableRooms()<booking.getNoOfRooms())
+        if(hotel==null || hotel.getAvailableRooms()<booking.getNoOfRooms())
         {
             return -1;
         }
         String bookingId=String.valueOf(UUID.randomUUID());
         booking.setBookingId(bookingId);
-        booking.setAmountToBePaid( booking.getNoOfRooms()* hotel.getPricePerNight() );
+        booking.setAmountToBePaid( booking.getNoOfRooms() * hotel.getPricePerNight() );
 
         Map<String, Booking> bookingMap = bookingRepository.getBookingMap();
-        if (bookingMap == null)
-        {
-            bookingMap = new HashMap<>();
-        }
         bookingMap.put(bookingId,booking);
         bookingRepository.setBookingMap(bookingMap);
-        return booking.getAmountToBePaid();
+        return booking.getNoOfRooms() * hotel.getPricePerNight();
     }
 
     public int getBookings(Integer aadharCard)
