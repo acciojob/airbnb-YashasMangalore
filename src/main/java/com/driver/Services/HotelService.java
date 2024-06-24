@@ -33,7 +33,7 @@ public class HotelService
         String hotelNameOfMostFacilities="";
         if(hotelMap.isEmpty())
             return hotelNameOfMostFacilities;
-        int maxFacilities=-1;
+        int maxFacilities=0;
 
         for(Map.Entry<String,Hotel> entry:hotelMap.entrySet())
         {
